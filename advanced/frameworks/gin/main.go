@@ -17,18 +17,18 @@ func main() {
 		c.String(200, "pong")
 	})
 
-	r.GET("/user/:name", func(c *gin.Context) {
+	r.GET("/user_struct/:name", func(c *gin.Context) {
 		user := c.Params.ByName("name")
 		value, ok := DB[user]
 		if ok {
-			c.JSON(200, gin.H{"user": user, "value": value})
+			c.JSON(200, gin.H{"user_struct": user, "value": value})
 		} else {
-			c.JSON(200, gin.H{"user": user, "status": "no value"})
+			c.JSON(200, gin.H{"user_struct": user, "status": "no value"})
 		}
 	})
 
 	authorized := r.Group("/", gin.BasicAuth(gin.Accounts{
-		"rvasily": "100500", // user:rvasily password:`100500`
+		"rvasily": "100500", // user_struct:rvasily password:`100500`
 	}))
 
 	authorized.GET("admin", func(c *gin.Context) {
